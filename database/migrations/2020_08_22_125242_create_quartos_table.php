@@ -14,8 +14,13 @@ class CreateQuartosTable extends Migration
     public function up()
     {
         Schema::create('quartos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('hotel_id');
+            $table->foreign('hotel_id')->references('id')->on('hotels');
+            $table->string('tipo');
+            $table->string('descricao');
+            $table->decimal('preco', 10, 2);
+            $table->string('imagem');
         });
     }
 
