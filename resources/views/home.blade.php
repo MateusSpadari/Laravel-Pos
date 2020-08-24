@@ -1,7 +1,7 @@
 @extends('index')
 @section('title', 'Home')
 @section('content')
-<div class="jumbotron jumbotron-fluid text-light" style="background-image: url('https://vaipromundo.com.br/blog/wp-content/uploads/2019/01/destaque-vpm-dubai.jpg')">
+<div class="jumbotron jumbotron-fluid text-light" style="background-image: url('https://images.unsplash.com/photo-1525935944571-4e99237764c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1951&q=80')">
   <div class="container">
 
     @if(Auth::user())

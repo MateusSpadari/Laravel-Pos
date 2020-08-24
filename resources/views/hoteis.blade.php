@@ -9,9 +9,9 @@
       <div class="card mb-3">
         <div style="background-image:url('{{ $hotel->imagem }}');height:300px;background-size:cover;" class="img-fluid" alt="Imagem do hotel"></div>
         <div class="card-body">
-          <h5 class="card-title">{{ $hotel->name }}</h5>
-          <small class="text-muted">{{ $hotel->location }}</small>
-          <p class="card-text">{{ $hotel->description }}</p>
+          <h5 class="card-title">{{ $hotel->nome }}</h5>
+          <small class="text-muted">{{ $hotel->localizacao }}</small>
+          <p class="card-text">{{ $hotel->descricao }}</p>
           <a href="/dashboard/reservas/create/{{ $hotel->id }}" class="btn btn-primary">Reservar agora</a>
         </div>
       </div>

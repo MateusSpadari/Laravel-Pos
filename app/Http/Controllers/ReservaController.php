@@ -48,7 +48,7 @@ class ReservaController extends Controller
         $user_id = \Auth::user()->getUserInfo()['sub'];
         $request->request->add(['usuario_id' => $user_id]);
 
-        dd($request);
+        // dd($request);
 
         Reserva::create($request->all());
 

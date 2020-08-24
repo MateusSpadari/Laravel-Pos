@@ -56,11 +56,11 @@
     </div>
   </div>
 
-  <form action="{{ route('reserva.destroy', $reserva->id) }}" method="POST">
+  <form action="{{ route('reservas.destroy', $reserva->id) }}" method="POST">
     @method('DELETE')
     @csrf
     <p class="text-right">
-      <button type="submit" class="btn btn-sm text-danger">Excluir reserva</button>
+      <button type="submit" class="btn btn-danger">Excluir reserva</button>
     </p>
   </form>
 </div>
