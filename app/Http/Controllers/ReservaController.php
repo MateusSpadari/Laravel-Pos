@@ -18,7 +18,8 @@ class ReservaController extends Controller
     public function index()
     {
         $reservas = Reserva::with('quarto', 'quarto.hotel')
-            ->orderBy('arrival', 'asc')
+            ->where('usuario_id', \Auth::user()->getUserInfo()['sub'])
+            ->orderBy('chegada', 'asc')
             ->get();
 
         return view('dashboard.reservas')->with('reservas', $reservas);
@@ -44,7 +45,11 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->request->add(['usuario_id' => 1]);
+        $user_id = \Auth::user()->getUserInfo()['sub'];
+        $request->request->add(['usuario_id' => $user_id]);
+
+        dd($request);
+
         Reserva::create($request->all());
 
         return redirect('dashboard/reservas')->with('success', 'Reserva criada com successo!');
@@ -59,10 +64,15 @@ class ReservaController extends Controller
     public function show(Reserva $reserva)
     {
         $reserva = Reserva::with('quarto', 'quarto.hotel')->get()->find($reserva->id);
-        $hotel_id = $reserva->quarto->hotel_id;
-        $hotelInfo = Hotel::with('quartos')->find($hotel_id);
 
-        return view('dashboard.reservaMostrar', compact('reserva', 'hotelInfo'));
+        if ($reserva->usuario_id === \Auth::user()->getUserInfo()['sub']) {
+            $hotel_id = $reserva->quarto->hotel_id;
+            $hotelInfo = Hotel::with('quartos')->find($hotel_id);
+
+            return view('dashboard.reservaMostrar', compact('reserva', 'hotelInfo'));
+        } else {
+            return redirect('dashboard/reservas')->with('error', 'Você não está autorizado para acessar essa rota do site.');
+        }
     }
 
     /**
@@ -74,10 +84,15 @@ class ReservaController extends Controller
     public function edit(Reserva $reserva)
     {
         $reserva = Reserva::with('quarto', 'quarto.hotel')->get()->find($reserva->id);
-        $hotel_id = $reserva->quarto->hotel_id;
-        $hotelInfo = Hotel::with('quartos')->get()->find($hotel_id);
 
-        return view('dashboard.reservaEditar', compact('reserva', 'hotelInfo'));
+        if ($reserva->usuario_id === \Auth::user()->getUserInfo()['sub']) {
+            $hotel_id = $reserva->quarto->hotel_id;
+            $hotelInfo = Hotel::with('quartos')->get()->find($hotel_id);
+
+            return view('dashboard.reservaEditar', compact('reserva', 'hotelInfo'));
+        } else {
+            return redirect('dashboard/reservas')->with('error', 'Você não está autorizado para acessar essa rota do site.');
+        }
     }
 
     /**
@@ -89,7 +104,15 @@ class ReservaController extends Controller
      */
     public function update(Request $request, Reserva $reserva)
     {
-        $reserva->usuario_id = 1;
+        if ($reserva->usuario_id === \Auth::user()->getUserInfo()['sub'])
+            return redirect('dashboard/reservas')->with('error', 'Você não está autorizado para acessar essa rota do site.');
+
+        $usuario_id = \Auth::user()->getUserInfo()['sub'];
+        $reserva->usuario_id = $usuario_id;
+        $reserva->num_de_convidados = $request->num_de_convidados;
+        $reserva->chegada = $request->chegada;
+        $reserva->partida = $request->partida;
+        $reserva->quarto_id = $request->quarto_id;
         $reserva->save();
 
         return redirect('dashboard/reservas')->with('success', 'Reserva atualizada com sucesso!');
@@ -104,8 +127,13 @@ class ReservaController extends Controller
     public function destroy(Reserva $reserva)
     {
         $reserva = Reserva::find($reserva->id);
-        $reserva->delete();
 
-        return redirect('dashboard/reservas')->with('success', 'Reserva excluida com sucesso!');
+        if ($reserva->usuario_id === \Auth::user()->getUserInfo()['sub']) {
+            $reserva->delete();
+
+            return redirect('dashboard/reservas')->with('success', 'Reserva excluida com sucesso!');
+        } else {
+            return redirect('dashboard/reservas')->with('error', 'Você não está autorizado para acessar essa rota do site.');
+        }
     }
 }

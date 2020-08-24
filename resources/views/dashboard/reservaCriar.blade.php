@@ -19,9 +19,9 @@
           <div class="col-sm-8">
             <div class="form-group">
               <label for="room">Tipo do quarto</label>
-              <select class="form-control" name="room_id">
-                @foreach ($hotelInfo->quartos as $opcao)
-                <option value="{{$option->id}}">{{ $opcao->tipo }} - ${{ $opcao->preco }}</option>
+              <select class="form-control" name="quarto_id">
+                @foreach ($hotelInfo->quartos as $opcoes)
+                <option value="{{$opcoes->id}}">{{ $opcoes->tipo }} - ${{ $opcoes->preco }}</option>
                 @endforeach
               </select>
             </div>

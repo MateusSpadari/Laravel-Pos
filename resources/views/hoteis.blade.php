@@ -4,10 +4,10 @@
 <div class="container my-5">
   <div class="row">
 
-    @foreach($hotels as $hotel)
+    @foreach($hoteis as $hotel)
     <div class="col-sm-4">
       <div class="card mb-3">
-        <div style="background-image:url('{{ $hotel->image }}');height:300px;background-size:cover;" class="img-fluid" alt="Imagem do hotel"></div>
+        <div style="background-image:url('{{ $hotel->imagem }}');height:300px;background-size:cover;" class="img-fluid" alt="Imagem do hotel"></div>
         <div class="card-body">
           <h5 class="card-title">{{ $hotel->name }}</h5>
           <small class="text-muted">{{ $hotel->location }}</small>

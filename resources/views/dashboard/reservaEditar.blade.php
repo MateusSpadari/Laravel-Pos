@@ -22,7 +22,7 @@
               <label for="room">Tipo do quarto</label>
               <select class="form-control" name="quarto_id" value="{{ old('quarto_id', $reserva->quarto_id) }}">
                 @foreach ($hotelInfo->quartos as $opcoes)
-                <option value="{{$option->id}}">{{ $opcoes->tipo }} - ${{ $opcoes->preco }}</option>
+                <option value="{{$opcoes->id}}">{{ $opcoes->tipo }} - ${{ $opcoes->preco }}</option>
                 @endforeach
               </select>
             </div>

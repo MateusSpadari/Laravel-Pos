@@ -19,7 +19,7 @@
         <div class="card-body">
           <h4 class="card-title">Encontre um quarto</h4>
           <p class="card-text">Pesquise no catálogo de hotéis</p>
-          <a href="/hotels" class="btn btn-primary">Nossos hotéis</a>
+          <a href="/hoteis" class="btn btn-primary">Nossos hotéis</a>
         </div>
       </div>
     </div>

@@ -3,9 +3,17 @@
 @section('content')
 <div class="jumbotron jumbotron-fluid text-light" style="background-image: url('https://vaipromundo.com.br/blog/wp-content/uploads/2019/01/destaque-vpm-dubai.jpg')">
   <div class="container">
+
+    @if(Auth::user())
+    <h1 class="display-4">Bem vindo novamente, {{ Auth::user()->nickname }}!</h1>
+    <p class="lead">Seu balcão único para gerenciamento de reservas.</p>
+    <a href="/dashboard" class="btn btn-success btn-lg my-2">Visualize seu painel administrativo</a>
+    @else
     <h1 class="display-4 font-weight-bold">Faça reservas de hotel de forma fácil</h1>
     <p class="lead font-weight-bold">Este site é um trabalho para a disciplina de Laravel da Pós Graduaçãoe em Desenvolimento de Distemas Web e Mobile da Faculdade Guairacá, seu objetivo é cadastrar reservas de viagem.</p>
     <a href="/login" class="btn btn-success btn-lg my-2">Cadastre-se para ver todos os hotéis</a>
+    @endif
+
   </div>
 </div>
 
