@@ -38,7 +38,7 @@ class QuartoSeeder extends Seeder
                 'hotel_id' => 2,
                 'tipo' => 'Quarto precidencial',
                 'descricao' => 'Luxo extremo para o casal e os filhos passarem noites maravilhosas.',
-                'preco' => 1.200,
+                'preco' => 1200.00,
                 'imagem' => 'https://images.unsplash.com/photo-1571992579655-8134e2b8df0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'
             ],
             [

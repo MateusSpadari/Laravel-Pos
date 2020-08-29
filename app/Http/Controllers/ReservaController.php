@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservaEmail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\Reserva;
 use App\Models\Hotel;
@@ -46,11 +48,13 @@ class ReservaController extends Controller
     public function store(Request $request)
     {
         $user_id = \Auth::user()->getUserInfo()['sub'];
+        $user_mail = \Auth::user()->getUserInfo()['email'];
         $request->request->add(['usuario_id' => $user_id]);
 
-        // dd($request);
+        // dd($user_mail);
 
         Reserva::create($request->all());
+        Mail::to($user_mail)->send(new ReservaEmail());
 
         return redirect('dashboard/reservas')->with('success', 'Reserva criada com successo!');
     }
